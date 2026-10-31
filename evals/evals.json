@@ -1,0 +1,41 @@
+{
+  "skill_name": "mobile-first-product-ui",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Our staff dashboard was built for desktop. On phones the 8-tab sidebar wraps and the activity table forces horizontal scrolling. Keep the desktop experience. Give me a plan to redesign the shell and activity list for phone use, and don't change permissions or APIs. Include a reusable component tree and interaction contracts I can port to another app.",
+      "expected_output": "A plan-first redesign with a reusable role-aware shell, desktop sidebar retention, phone cards and wide semantic table backed by the same records, mobile filter sheet and bounded pagination, plus viewport/accessibility checks.",
+      "files": [],
+      "expectations": [
+        "Keeps phone navigation to a small role/task-aware primary set with secondary destinations in a More sheet, while retaining a desktop sidebar and safe-area content spacing.",
+        "Defines phone cards and a wide semantic table over the same records, mobile filter sheet with active count/apply-reset, and bounded phone Load more versus wide pagination.",
+        "Explicitly preserves existing permissions, APIs, queries, and server-side authorization.",
+        "Includes viewport, overflow, tap-target, keyboard/focus, and safe-area checks."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I need to make our field-agent checkout form comfortable on Android. It has customer details, item selection, review and payment. People lose everything when the connection drops. How should we structure the mobile flow without changing the backend contract? Give me reusable component boundaries and spell out the retry behavior.",
+      "expected_output": "A concrete phone-first multi-step form structure with short steps, progress, correct inputs, sticky safe-area actions, useful running summary, state preservation, clear retry behavior, and explicit preservation of backend validation/payload/idempotency semantics.",
+      "files": [],
+      "expectations": [
+        "Uses short, goal-based steps that fit small phone heights and exposes progress accessibly.",
+        "Keeps a sticky action area clear of safe areas and the on-screen keyboard.",
+        "Preserves entered state and communicates field/request errors after network or validation failures.",
+        "Does not change API payload, server calculations, or validation, and retains the same idempotency key for a retry of one logical submission when the backend contract uses one."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We're making a phone scanner for field staff on unreliable data. Make the workflow feel fast and clear, including what happens when the network drops, the camera permission is denied, or a record is rejected. It must never show a success unless the server accepted it. Include a reusable screen/state structure and explain how the UI knows the server is reachable.",
+      "expected_output": "A clear live-operation screen structure with visible context and server reachability, accessible large controls, distinct success/rejection/permission/network states, a server-authoritative outcome rule, and realistic device/network verification.",
+      "files": [],
+      "expectations": [
+        "Keeps task context and connection state visible while giving the live work surface priority; uses a lightweight server heartbeat or real request outcomes rather than relying only on navigator.onLine.",
+        "Defines distinct success, rejected, permission-denied, processing, and network-error states with recovery actions.",
+        "Never treats device-local state or network loss as server-confirmed success and does not invent offline authority.",
+        "Includes accessibility and real-device checks while distinguishing emulator checks from physical camera/network validation."
+      ]
+    }
+  ]
+}
